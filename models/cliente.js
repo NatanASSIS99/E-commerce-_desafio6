@@ -1,26 +1,39 @@
 // models/cliente.js
-const { DataTypes } = require('sequelize');
+
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database'); // Ajuste o caminho se necessário
 
-const Cliente = sequelize.define('Cliente', {
+class Cliente extends Model {}
+
+Cliente.init({
   nome: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   telefone: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   endereco: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false
+  }
 }, {
-  timestamps: true, // Isso cria `createdAt` e `updatedAt` automaticamente
+  sequelize,
+  modelName: 'Cliente',
+  tableName: 'cliente' // Certifique-se de que o nome da tabela está correto
 });
 
 module.exports = Cliente;

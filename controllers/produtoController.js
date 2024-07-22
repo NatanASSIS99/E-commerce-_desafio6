@@ -1,11 +1,13 @@
+// controllers/produtoController.js
+
 const Produto = require('../models/produto');
 
 exports.listar = async (req, res) => {
   try {
     const produtos = await Produto.findAll();
     res.json(produtos);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -15,10 +17,10 @@ exports.obter = async (req, res) => {
     if (produto) {
       res.json(produto);
     } else {
-      res.status(404).json({ message: 'Produto não encontrado' });
+      res.status(404).json({ error: 'Produto não encontrado' });
     }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -26,8 +28,8 @@ exports.criar = async (req, res) => {
   try {
     const produto = await Produto.create(req.body);
     res.status(201).json(produto);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 
@@ -38,10 +40,10 @@ exports.atualizar = async (req, res) => {
       await produto.update(req.body);
       res.json(produto);
     } else {
-      res.status(404).json({ message: 'Produto não encontrado' });
+      res.status(404).json({ error: 'Produto não encontrado' });
     }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 
@@ -50,11 +52,11 @@ exports.deletar = async (req, res) => {
     const produto = await Produto.findByPk(req.params.id);
     if (produto) {
       await produto.destroy();
-      res.status(204).send();
+      res.json({ message: 'Produto deletado com sucesso' });
     } else {
-      res.status(404).json({ message: 'Produto não encontrado' });
+      res.status(404).json({ error: 'Produto não encontrado' });
     }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };

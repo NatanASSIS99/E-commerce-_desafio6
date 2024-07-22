@@ -1,17 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const Cliente = require('../models/cliente'); 
+// controllers/clienteController.js
 
-router.get('/', async (req, res) => {
+const Cliente = require('../models/cliente'); // Ajuste o caminho conforme a estrutura do seu projeto
+
+exports.listar = async (req, res) => {
   try {
     const clientes = await Cliente.findAll();
     res.json(clientes);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+};
 
-router.get('/:id', async (req, res) => {
+exports.obter = async (req, res) => {
   try {
     const cliente = await Cliente.findByPk(req.params.id);
     if (cliente) {
@@ -22,18 +22,18 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+};
 
-router.post('/', async (req, res) => {
+exports.criar = async (req, res) => {
   try {
     const cliente = await Cliente.create(req.body);
     res.status(201).json(cliente);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-});
+};
 
-router.put('/:id', async (req, res) => {
+exports.atualizar = async (req, res) => {
   try {
     const cliente = await Cliente.findByPk(req.params.id);
     if (cliente) {
@@ -45,9 +45,9 @@ router.put('/:id', async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-});
+};
 
-router.delete('/:id', async (req, res) => {
+exports.deletar = async (req, res) => {
   try {
     const cliente = await Cliente.findByPk(req.params.id);
     if (cliente) {
@@ -59,6 +59,4 @@ router.delete('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
-
-module.exports = router;
+};

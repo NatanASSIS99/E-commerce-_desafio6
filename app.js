@@ -3,8 +3,6 @@ const express = require('express');
 const sequelize = require('./config/database');
 const produtoRoutes = require('./routes/produtos');
 const clienteRoutes = require('./routes/clientes');
-const vendaRoutes = require('./routes/vendas');
-const pedidoRoutes = require('./routes/pedidos');
 const estoqueRoutes = require('./routes/estoques');
 
 const app = express();
@@ -13,8 +11,6 @@ app.use(express.json());
 
 app.use('/produtos', produtoRoutes);
 app.use('/cliente', clienteRoutes);
-app.use('/vendas', vendaRoutes);
-app.use('/pedidos', pedidoRoutes);
 app.use('/estoques', estoqueRoutes);
 
 sequelize.authenticate().then(() => {
