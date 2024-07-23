@@ -13,8 +13,9 @@ const Estoque = sequelize.define('estoque', {
     allowNull: true,
   },
 }, {
+  sequelize,
   tableName: 'estoque',
-  timestamps: false, // Se você não tiver as colunas createdAt e updatedAt
+  timestamps: true, 
 });
 
 module.exports = Estoque;

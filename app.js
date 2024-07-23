@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use('/produtos', produtoRoutes);
 app.use('/cliente', clienteRoutes);
-app.use('/estoques', estoqueRoutes);
+app.use('/estoque', estoqueRoutes);
 
 sequelize.authenticate().then(() => {
   console.log('Conexão com o banco de dados estabelecida com sucesso.');
